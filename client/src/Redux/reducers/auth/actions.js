@@ -9,7 +9,7 @@ const actions = {
     LIKE: "auth/LIKE",
 
     loginUser: (token) => async (dispatch) => 
-        dispatch({
+        await dispatch({
             type: actions.LOGIN,
             token: token,
         }),
@@ -18,7 +18,7 @@ const actions = {
         try {
             const { data } = await api.fetchPosts();
             
-            dispatch({ type: actions.FETCH_ALL, posts: data, })
+            await dispatch({ type: actions.FETCH_ALL, posts: data, })
         } catch (error) {
             console.log(error.message)
         }
@@ -28,7 +28,7 @@ const actions = {
         try {
             const { data } = await api.createPosts(post);
     
-            dispatch({ type: actions.CREATE, posts: data })
+            await dispatch({ type: actions.CREATE, posts: data })
         } catch (error) {
             console.log(error.message)
         }
@@ -37,8 +37,7 @@ const actions = {
     updatePost: (id, post) => async (dispatch) => {
         try {
             const { data } = await api.updatePosts(id, post);
-    
-            dispatch({ type: actions.UPDATE, posts: data })
+            await dispatch({ type: actions.UPDATE, posts: data })
         } catch (error) {
             console.log(error.message)
         }
@@ -48,7 +47,7 @@ const actions = {
         try {
             await api.deletePosts(id);
     
-            dispatch({ type: actions.DELETE, posts: id })
+            await dispatch({ type: actions.DELETE, posts: id })
         } catch(error) {
             console.log(error.message)
         }
@@ -58,7 +57,7 @@ const actions = {
         try {
             const { data } = await api.likePost(id);
     
-            dispatch({ type: actions.LIKE , posts: data })
+            await dispatch({ type: actions.LIKE , posts: data })
         } catch(error) {
             console.log(error.message)
         }
